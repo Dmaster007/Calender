@@ -1,9 +1,7 @@
 <div class="mt-2">
   <form [formGroup]="newEvent" (ngSubmit)="onSubmit()">
     <div class="mb-2">
-      <label for="title" class="block text-gray-700 text-sm font-bold mb-1"
-        >Title:</label
-      >
+      <label for="title" class="block text-gray-700 text-sm font-bold mb-1">Title:</label>
       <input
         type="text"
         id="title"
@@ -14,11 +12,7 @@
       />
     </div>
     <div class="mb-2">
-      <label
-        for="description"
-        class="block text-gray-700 text-sm font-bold mb-1"
-        >Description:</label
-      >
+      <label for="description" class="block text-gray-700 text-sm font-bold mb-1">Description:</label>
       <textarea
         [formControl]="desc"
         id="description"
@@ -29,6 +23,68 @@
       ></textarea>
     </div>
     <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <div
+          (click)="selectColor('red')"
+          [ngClass]="{
+            'bg-red-500 border-gray-300': selectedColor !== 'red',
+            'bg-red-400 border-white': selectedColor === 'red'
+          }"
+          class="w-4 h-4 rounded-full border relative"
+        >
+          <div *ngIf="selectedColor === 'red'" class="absolute inset-0 flex items-center justify-center">
+            <div class="w-2 h-2 rounded-full bg-white"></div>
+          </div>
+        </div>
+        <div
+          (click)="selectColor('green')"
+          [ngClass]="{
+            'bg-green-500 border-gray-300': selectedColor !== 'green',
+            'bg-green-400 border-white': selectedColor === 'green'
+          }"
+          class="w-4 h-4 rounded-full border relative"
+        >
+          <div *ngIf="selectedColor === 'green'" class="absolute inset-0 flex items-center justify-center">
+            <div class="w-2 h-2 rounded-full bg-white"></div>
+          </div>
+        </div>
+        <div
+          (click)="selectColor('blue')"
+          [ngClass]="{
+            'bg-blue-500 border-gray-300': selectedColor !== 'blue',
+            'bg-blue-400 border-white': selectedColor === 'blue'
+          }"
+          class="w-4 h-4 rounded-full border relative"
+        >
+          <div *ngIf="selectedColor === 'blue'" class="absolute inset-0 flex items-center justify-center">
+            <div class="w-2 h-2 rounded-full bg-white"></div>
+          </div>
+        </div>
+        <div
+          (click)="selectColor('purple')"
+          [ngClass]="{
+            'bg-purple-500 border-gray-300': selectedColor !== 'purple',
+            'bg-purple-400 border-white': selectedColor === 'purple'
+          }"
+          class="w-4 h-4 rounded-full border relative"
+        >
+          <div *ngIf="selectedColor === 'purple'" class="absolute inset-0 flex items-center justify-center">
+            <div class="w-2 h-2 rounded-full bg-white"></div>
+          </div>
+        </div>
+        <div
+          (click)="selectColor('orange')"
+          [ngClass]="{
+            'bg-orange-500 border-gray-300': selectedColor !== 'orange',
+            'bg-orange-400 border-white': selectedColor === 'orange'
+          }"
+          class="w-4 h-4 rounded-full border relative"
+        >
+          <div *ngIf="selectedColor === 'orange'" class="absolute inset-0 flex items-center justify-center">
+            <div class="w-2 h-2 rounded-full bg-white"></div>
+          </div>
+        </div>
+      </div>
       <button
         type="submit"
         class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline"
@@ -42,12 +98,19 @@
   <h3 class="text-indigo-500 font-semibold text-sm mb-2">Events :</h3>
   <ul class="list-disc list-inside">
     <div *ngFor="let event of currEvents" class="mb-2 border p-1 rounded shadow">
-      <div
-        class="p-2 border border-gray-300 rounded bg-indigo-100 flex items-center justify-between"
-      >
+      <div [ngClass]="event.color" class=" p-2 border border-gray-300 rounded  flex items-center justify-between" >
         <div>
           <strong class="block text-indigo-600">{{ event.title }}</strong>
-          <span>{{ truncate(event.desc, 30) }}</span>
+          <span>{{ truncate(event.desc, 15) }}</span>
+        </div>
+        <div *ngIf="event.date.getDate() - events.todaysDate.getDate() < 0">
+          {{-1*(event.date.getDate() - events.todaysDate.getDate())}} day's ahead
+        </div>
+        <div *ngIf="event.date.getDate() - events.todaysDate.getDate() > 0">
+          {{event.date.getDate() - events.todaysDate.getDate()}} day's remaining
+        </div>
+        <div *ngIf="event.date.getDate() - events.todaysDate.getDate() === 0">
+          Today
         </div>
         <button
           (click)="openDialog(event)"
