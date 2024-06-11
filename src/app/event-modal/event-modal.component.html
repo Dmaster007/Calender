@@ -1,0 +1,33 @@
+<div class="p-4 bg-white rounded-lg shadow-lg">
+  <h2 class="text-xl font-semibold text-indigo-600 p-2">
+    {{ data.date | date }}
+  </h2>
+  <h2 mat-dialog-title class="text-2xl font-bold text-gray-800">
+    {{ data.title | titlecase }}
+  </h2>
+  <mat-dialog-content
+    [ngClass]="data.color"
+    class="mat-typography w-auto min-w-[300px] min-h-[100px] max-w-screen max-h-screen overflow-auto box-border p-4 rounded-lg text-gray-800"
+  >
+    <div class="text-wrap">
+      <span class="mt-3">Details: {{ data.desc }}</span>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end" class="mt-4">
+    <button
+      mat-button
+      mat-dialog-close="deleted"
+      (click)="deleteEvent()"
+      class="bg-indigo-500 hover:bg-indigo-700 mr-2 text-white font-bold py-2 px-4 border border-indigo-700 rounded"
+    >
+      Delete
+    </button>
+    <button
+      mat-button
+      mat-dialog-close
+      class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 border border-indigo-700 rounded"
+    >
+      Close
+    </button>
+  </mat-dialog-actions>
+</div>

@@ -1,0 +1,12 @@
+<div class="flex flex-col md:flex-row md:space-x-4 p-4">
+    <div class="md:w-1/3">
+      <mat-card class="demo-inline-calendar-card">
+        <mat-calendar [(selected)]="selected"></mat-calendar>
+      </mat-card>
+    </div>
+    <div class="mt-4 md:mt-0 md:w-2/3 border p-2 border-gray-300 rounded">
+      <span class="text-indigo-500 font-medium text-sm"> {{ selected | date:'fullDate' }}</span>
+      <app-events [selected] ='selected' ></app-events>
+    </div>
+  </div>
+  
