@@ -98,7 +98,7 @@
   <h3 class="text-indigo-500 font-semibold text-sm mb-2">Events :</h3>
   <ul class="list-disc list-inside">
     <div *ngFor="let event of currEvents" class="mb-2 border p-1 rounded shadow">
-      <div [ngClass]="event.color" class=" p-2 border border-gray-300 rounded  flex items-center justify-between" >
+      <div [ngClass]="event.color" class=" p-2 border border-gray-300  rounded  flex items-center justify-between" >
         <div>
           <strong class="block text-indigo-600">{{ event.title }}</strong>
           <span>{{ truncate(event.desc, 15) }}</span>
